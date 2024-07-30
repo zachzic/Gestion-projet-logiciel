@@ -12,7 +12,7 @@ public class Activite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    private LocalDate data_debut;
+    private LocalDate date_debut;
     private LocalDate date_fin;
     private String responsable;
 
@@ -20,8 +20,8 @@ public class Activite {
     @JoinColumn(name = "tache_id")
     private Tache tache;
 
-    @OneToMany(mappedBy = "activites", cascade = CascadeType.ALL)
-    private List<Ressource> ressources;
+    @OneToMany(mappedBy = "activite", cascade = CascadeType.ALL)
+    private List<Ressource> ressource;
 
     public Long getId() {
         return id;
@@ -39,12 +39,12 @@ public class Activite {
         this.nom = nom;
     }
 
-    public LocalDate getData_debut() {
-        return data_debut;
+    public LocalDate getDate_debut() {
+        return date_debut;
     }
 
-    public void setData_debut(LocalDate data_debut) {
-        this.data_debut = data_debut;
+    public void setDate_debut(LocalDate data_debut) {
+        this.date_debut = data_debut;
     }
 
     public LocalDate getDate_fin() {

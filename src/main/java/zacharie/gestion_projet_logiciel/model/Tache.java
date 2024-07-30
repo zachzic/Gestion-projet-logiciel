@@ -21,7 +21,7 @@ public class Tache {
     private Projet projet;
 
     @OneToMany(mappedBy = "tache", cascade = CascadeType.ALL)
-    private List<Activite> activites;
+    private List<Activite> activite;
 
     public Long getId() {
         return id;
@@ -79,11 +79,11 @@ public class Tache {
         this.projet = projet;
     }
 
-    public List<Activite> getActivites() {
-        return activites;
+    public List<Activite> getActivite() {
+        return activite;
     }
 
-    public void setActivites(List<Activite> activites) {
-        this.activites = activites;
+    public void setActivite(List<Activite> activite) {
+        this.activite = activite;
     }
 }

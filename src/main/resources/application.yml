@@ -1,0 +1,31 @@
+spring:
+  # Configuration de la source de données
+  datasource:
+    # URL de connexion à la base de données MySQL
+    url: jdbc:mysql://localhost:3307/gestion_projet_logiciel
+    # Nom d'utilisateur pour la base de données
+    username: root
+    # Mot de passe pour la base de données
+    password:
+    # Classe du driver JDBC pour MySQL
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Configuration de JPA (Java Persistence API)
+  jpa:
+    # Configuration de Hibernate, le fournisseur JPA par défaut
+    hibernate:
+      # Stratégie de gestion du schéma de la base de données
+      ddl-auto: update  # update, create, create-drop, validate, none
+    # Afficher les requêtes SQL générées par Hibernate dans la console
+    show-sql: true
+    # Propriétés spécifiques de Hibernate
+    properties:
+      hibernate:
+        # Spécifie le dialecte de la base de données utilisé par Hibernate
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  # Configuration de la console H2 (utile pour les tests en mémoire)
+  h2:
+    console:
+      # Activer la console H2
+      enabled: true
