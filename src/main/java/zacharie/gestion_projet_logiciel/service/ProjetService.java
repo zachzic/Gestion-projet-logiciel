@@ -1,32 +1,44 @@
 package zacharie.gestion_projet_logiciel.service;
 
-import zacharie.gestion_projet_logiciel.model.Projet;
-import zacharie.gestion_projet_logiciel.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import zacharie.gestion_projet_logiciel.dto.ProjetDTO;
+import zacharie.gestion_projet_logiciel.mapper.ProjetMapper;
+import zacharie.gestion_projet_logiciel.model.Projet;
+import zacharie.gestion_projet_logiciel.repository.ProjetRepository;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjetService {
     @Autowired
     private ProjetRepository projetRepository;
 
-    public Projet createProjet(Projet projet) {
-        return projetRepository.save(projet);
+    public ProjetDTO createProjet(ProjetDTO projetDTO) {
+        Projet projet = ProjetMapper.INSTANCE.projetDTOToProjet(projetDTO);
+        projet = projetRepository.save(projet);
+        return ProjetMapper.INSTANCE.projetToProjetDTO(projet);
     }
 
-    public Optional<Projet> getProjetById(Long id) {
-        return projetRepository.findById(id);
+    public List<ProjetDTO> getAllProjets() {
+        return projetRepository.findAll().stream()
+                .map(ProjetMapper.INSTANCE::projetToProjetDTO)
+                .collect(Collectors.toList());
     }
 
-    public List<Projet> getAllProjets() {
-        return projetRepository.findAll();
+    public ProjetDTO getProjetById(Long id) {
+        Projet projet = projetRepository.findById(id).orElseThrow(() -> new RuntimeException("Projet not found"));
+        return ProjetMapper.INSTANCE.projetToProjetDTO(projet);
     }
 
-    public Projet updateProjet(Projet projet) {
-        return projetRepository.save(projet);
+    public ProjetDTO updateProjet(Long id, ProjetDTO projetDTO) {
+        Projet projet = projetRepository.findById(id).orElseThrow(() -> new RuntimeException("Projet not found"));
+        projet.setNom(projetDTO.getNom());
+        projet.setDate_debut(projetDTO.getDateDebut());
+        projet.setDate_fin(projetDTO.getDateFin());
+        projet = projetRepository.save(projet);
+        return ProjetMapper.INSTANCE.projetToProjetDTO(projet);
     }
 
     public void deleteProjet(Long id) {
