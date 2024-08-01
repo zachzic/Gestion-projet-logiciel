@@ -13,9 +13,18 @@ public class Projet {
     private String nom;
     private LocalDate date_debut;
     private LocalDate date_fin;
+    private double budget;
 
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
     private List<Tache> tache;
+
+    public double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(double budget) {
+        this.budget = budget;
+    }
 
     public Long getId() {
         return id;

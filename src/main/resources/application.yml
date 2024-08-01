@@ -1,31 +1,64 @@
-spring:
-  # Configuration de la source de données
-  datasource:
-    # URL de connexion à la base de données MySQL
-    url: jdbc:mysql://localhost:3307/gestion_projet_logiciel
-    # Nom d'utilisateur pour la base de données
-    username: root
-    # Mot de passe pour la base de données
-    password:
-    # Classe du driver JDBC pour MySQL
-    driver-class-name: com.mysql.cj.jdbc.Driver
+# Configuration du serveur
+server:
+  port: 8080
+  servlet:
+    context-path: /gestion-projet
 
-  # Configuration de JPA (Java Persistence API)
+# Configuration de la source de données
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3307/gestion_projet_logiciel
+  # Configuration JPA
   jpa:
-    # Configuration de Hibernate, le fournisseur JPA par défaut
     hibernate:
-      # Stratégie de gestion du schéma de la base de données
-      ddl-auto: update  # update, create, create-drop, validate, none
-    # Afficher les requêtes SQL générées par Hibernate dans la console
-    show-sql: true
-    # Propriétés spécifiques de Hibernate
+      ddl-auto: update
+      # La valeur "update" permet à Hibernate de générer automatiquement les tables si elles n'existent pas
     properties:
       hibernate:
-        # Spécifie le dialecte de la base de données utilisé par Hibernate
         dialect: org.hibernate.dialect.MySQLDialect
+        # Le dialecte Hibernate pour MySQL
+        format_sql: true
+        # Afficher le SQL formaté dans la console
+      show-sql: true
+      # Afficher les requêtes SQL dans la console
 
   # Configuration de la console H2 (utile pour les tests en mémoire)
   h2:
     console:
       # Activer la console H2
       enabled: true
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/gestion-projet
+
+# Configuration de l'application spécifique à Keycloak
+app:
+  keycloak:
+    admin:
+      password: xxxxx
+      username: xxxxx
+    client-id: gestion-projet-client
+    client-secret: sIgnaAtf9ciilSBuIbFctcSbep7W50Py
+    grant-type: password
+    login:
+      url: http://localhost:8080/auth/realms/gestion-projet/protocol/openid-connect/token
+    realm:
+      name: gestion-projet
+    server:
+      url: http://localhost:8080/auth
+
+keycloak:
+  ssl-required: external
+  use-resource-role-mappings: true
+
+jwt:
+  auth:
+    converter:
+      resource-id: gestion-projet
+      principal-attribute: preferred_username
