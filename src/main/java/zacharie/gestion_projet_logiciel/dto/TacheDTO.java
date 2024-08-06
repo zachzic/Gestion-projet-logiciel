@@ -6,12 +6,15 @@ import java.util.List;
 public class TacheDTO {
     private Long id;
     private String nom;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+    private LocalDate date_debut;
+    private LocalDate date_fin;
     private int priorite;
     private String responsable;
+    private String description;  // Ajoutez ce champ
+    private Long projet_id;  // Ajoutez ce champ
     private List<ActiviteDTO> activites;
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -28,20 +31,20 @@ public class TacheDTO {
         this.nom = nom;
     }
 
-    public LocalDate getDateDebut() {
-        return dateDebut;
+    public LocalDate getDate_debut() {
+        return date_debut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
-        this.dateDebut = dateDebut;
+    public void setDate_debut(LocalDate date_debut) {
+        this.date_debut = date_debut;
     }
 
-    public LocalDate getDateFin() {
-        return dateFin;
+    public LocalDate getDate_fin() {
+        return date_fin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
-        this.dateFin = dateFin;
+    public void setDate_fin(LocalDate date_fin) {
+        this.date_fin = date_fin;
     }
 
     public int getPriorite() {
@@ -58,6 +61,22 @@ public class TacheDTO {
 
     public void setResponsable(String responsable) {
         this.responsable = responsable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getProjet_id() {
+        return projet_id;
+    }
+
+    public void setProjet_id(Long projet_id) {
+        this.projet_id = projet_id;
     }
 
     public List<ActiviteDTO> getActivites() {

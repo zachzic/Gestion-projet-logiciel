@@ -6,10 +6,12 @@ import java.util.List;
 public class ProjetDTO {
     private Long id;
     private String nom;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
-    private List<TacheDTO> taches;
+    private LocalDate date_debut;
+    private LocalDate date_fin;
+    private Double budget;
+//    private List<TacheDTO> taches;
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -26,27 +28,35 @@ public class ProjetDTO {
         this.nom = nom;
     }
 
-    public LocalDate getDateDebut() {
-        return dateDebut;
+    public LocalDate getDate_debut() {
+        return date_debut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
-        this.dateDebut = dateDebut;
+    public void setDate_debut(LocalDate date_debut) {
+        this.date_debut = date_debut;
     }
 
-    public LocalDate getDateFin() {
-        return dateFin;
+    public LocalDate getDate_fin() {
+        return date_fin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
-        this.dateFin = dateFin;
+    public void setDate_fin(LocalDate date_fin) {
+        this.date_fin = date_fin;
     }
 
-    public List<TacheDTO> getTaches() {
-        return taches;
+    public Double getBudget() {
+        return budget;
     }
 
-    public void setTaches(List<TacheDTO> taches) {
-        this.taches = taches;
+    public void setBudget(Double budget) {
+        this.budget = budget;
     }
+
+//    public List<TacheDTO> getTaches() {
+//        return taches;
+//    }
+//
+//    public void setTaches(List<TacheDTO> taches) {
+//        this.taches = taches;
+//    }
 }

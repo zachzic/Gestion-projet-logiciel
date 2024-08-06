@@ -38,27 +38,27 @@ spring:
           issuer-uri: http://localhost:8080/auth/realms/gestion-projet
 
 # Configuration de l'application spécifique à Keycloak
-app:
-  keycloak:
-    admin:
-      password: xxxxx
-      username: xxxxx
-    client-id: gestion-projet-client
-    client-secret: sIgnaAtf9ciilSBuIbFctcSbep7W50Py
-    grant-type: password
-    login:
-      url: http://localhost:8080/auth/realms/gestion-projet/protocol/openid-connect/token
-    realm:
-      name: gestion-projet
-    server:
-      url: http://localhost:8080/auth
-
-keycloak:
-  ssl-required: external
-  use-resource-role-mappings: true
-
-jwt:
-  auth:
-    converter:
-      resource-id: gestion-projet
-      principal-attribute: preferred_username
+#app:
+#  keycloak:
+#    admin:
+#      password: xxxxx
+#      username: xxxxx
+#    client-id: gestion-projet
+#    client-secret: SKCLsloHZyrFbtb5Kcm8s3B3vFvEHkCZ
+#    grant-type: password
+#    login:
+#      url: http://localhost:8080/auth/realms/gestion-projet/protocol/openid-connect/token
+#    realm:
+#      name: gestion-projet
+#    server:
+#      url: http://localhost:8080/auth
+#
+#keycloak:
+#  ssl-required: external
+#  use-resource-role-mappings: true
+#
+#jwt:
+#  auth:
+#    converter:
+#      resource-id: gestion-projet
+#      principal-attribute: preferred_username

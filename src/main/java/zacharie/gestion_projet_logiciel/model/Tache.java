@@ -15,6 +15,7 @@ public class Tache {
     private LocalDate date_fin;
     private int priorite;
     private String responsable;
+    private String description; // Ajoutez cet attribut
 
     @ManyToOne
     @JoinColumn(name = "projet_id")
@@ -69,6 +70,14 @@ public class Tache {
 
     public void setResponsable(String responsable) {
         this.responsable = responsable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Projet getProjet() {

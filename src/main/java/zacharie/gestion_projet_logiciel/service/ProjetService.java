@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zacharie.gestion_projet_logiciel.dto.ProjetDTO;
 import zacharie.gestion_projet_logiciel.mapper.ProjetMapper;
+import zacharie.gestion_projet_logiciel.mapper.TacheMapper;
 import zacharie.gestion_projet_logiciel.model.Projet;
 import zacharie.gestion_projet_logiciel.repository.ProjetRepository;
 
@@ -35,8 +36,10 @@ public class ProjetService {
     public ProjetDTO updateProjet(Long id, ProjetDTO projetDTO) {
         Projet projet = projetRepository.findById(id).orElseThrow(() -> new RuntimeException("Projet not found"));
         projet.setNom(projetDTO.getNom());
-        projet.setDate_debut(projetDTO.getDateDebut());
-        projet.setDate_fin(projetDTO.getDateFin());
+        projet.setDate_debut(projetDTO.getDate_debut());
+        projet.setDate_fin(projetDTO.getDate_fin());
+        projet.setBudget(projetDTO.getBudget());
+//        projet.setTache(projetDTO.getTaches().stream().map(TacheMapper.INSTANCE::tacheDTOToTache).collect(Collectors.toList()));
         projet = projetRepository.save(projet);
         return ProjetMapper.INSTANCE.projetToProjetDTO(projet);
     }

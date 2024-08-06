@@ -4,7 +4,7 @@ import zacharie.gestion_projet_logiciel.model.Activite;
 import zacharie.gestion_projet_logiciel.service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class ActiviteController {
     @Autowired
     private ActiviteService activiteService;
 
-    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
+//    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PostMapping
     public ResponseEntity<Activite> createActivite(@RequestBody Activite activite) {
         Activite newActivite = activiteService.createActivite(activite);
@@ -35,7 +35,7 @@ public class ActiviteController {
         return ResponseEntity.ok(activites);
     }
 
-    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
+//    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PutMapping("/{id}")
     public ResponseEntity<Activite> updateActivite(@PathVariable Long id, @RequestBody Activite activite) {
         activite.setId(id);
@@ -43,7 +43,7 @@ public class ActiviteController {
         return ResponseEntity.ok(updatedActivite);
     }
 
-    @PreAuthorize("hasRole('CHEF_DE_PROJET')")
+//    @PreAuthorize("hasRole('CHEF_DE_PROJET')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteActivite(@PathVariable Long id) {
         activiteService.deleteActivite(id);

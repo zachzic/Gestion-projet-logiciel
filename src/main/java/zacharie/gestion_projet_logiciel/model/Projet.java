@@ -18,6 +18,7 @@ public class Projet {
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
     private List<Tache> tache;
 
+    // Getters and Setters
     public double getBudget() {
         return budget;
     }
@@ -58,4 +59,11 @@ public class Projet {
         this.date_fin = date_fin;
     }
 
+//    public List<Tache> getTache() {
+//        return tache;
+//    }
+//
+//    public void setTache(List<Tache> tache) {
+//        this.tache = tache;
+//    }
 }

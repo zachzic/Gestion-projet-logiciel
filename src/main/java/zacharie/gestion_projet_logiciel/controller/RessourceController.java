@@ -4,7 +4,7 @@ import zacharie.gestion_projet_logiciel.model.Ressource;
 import zacharie.gestion_projet_logiciel.service.RessourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class RessourceController {
     @Autowired
     private RessourceService ressourceService;
 
-    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
+//    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PostMapping
     public ResponseEntity<Ressource> createRessource(@RequestBody Ressource ressource) {
         Ressource newRessource = ressourceService.createRessource(ressource);
@@ -35,7 +35,7 @@ public class RessourceController {
         return ResponseEntity.ok(ressources);
     }
 
-    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
+//    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PutMapping("/{id}")
     public ResponseEntity<Ressource> updateRessource(@PathVariable Long id, @RequestBody Ressource ressource) {
         ressource.setId(id);
@@ -43,7 +43,7 @@ public class RessourceController {
         return ResponseEntity.ok(updatedRessource);
     }
 
-    @PreAuthorize("hasRole('CHEF_DE_PROJET')")
+//    @PreAuthorize("hasRole('CHEF_DE_PROJET')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRessource(@PathVariable Long id) {
         ressourceService.deleteRessource(id);
