@@ -2,6 +2,7 @@ package zacharie.gestion_projet_logiciel.model;
 
 import jakarta.annotation.Resource;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,8 +44,8 @@ public class Activite {
         return date_debut;
     }
 
-    public void setDate_debut(LocalDate data_debut) {
-        this.date_debut = data_debut;
+    public void setDate_debut(LocalDate date_debut) {
+        this.date_debut = date_debut;
     }
 
     public LocalDate getDate_fin() {

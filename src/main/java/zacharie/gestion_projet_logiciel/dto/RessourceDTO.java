@@ -4,6 +4,7 @@ public class RessourceDTO {
     private Long id;
     private String nom;
     private String url;
+    private Long activite_id;
 
     public Long getId() {
         return id;
@@ -27,5 +28,13 @@ public class RessourceDTO {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Long getActivite_id() {
+        return activite_id;
+    }
+
+    public void setActivite_id(Long activite_id) {
+        this.activite_id = activite_id;
     }
 }

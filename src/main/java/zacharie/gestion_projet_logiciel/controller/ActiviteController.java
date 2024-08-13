@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.controller;
 
+import zacharie.gestion_projet_logiciel.dto.ActiviteDTO;
 import zacharie.gestion_projet_logiciel.model.Activite;
 import zacharie.gestion_projet_logiciel.service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class ActiviteController {
 
 //    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PostMapping
-    public ResponseEntity<Activite> createActivite(@RequestBody Activite activite) {
-        Activite newActivite = activiteService.createActivite(activite);
+    public ResponseEntity<Activite> createActivite(@RequestBody ActiviteDTO activiteDTO) {
+        Activite newActivite = activiteService.createActivite(activiteDTO);
         return ResponseEntity.ok(newActivite);
     }
 
@@ -37,9 +38,8 @@ public class ActiviteController {
 
 //    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PutMapping("/{id}")
-    public ResponseEntity<Activite> updateActivite(@PathVariable Long id, @RequestBody Activite activite) {
-        activite.setId(id);
-        Activite updatedActivite = activiteService.updateActivite(activite);
+    public ResponseEntity<ActiviteDTO> updateActivite(@PathVariable Long id, @RequestBody ActiviteDTO activiteDTO) {
+        ActiviteDTO updatedActivite = activiteService.updateActivite(id,activiteDTO);
         return ResponseEntity.ok(updatedActivite);
     }
 

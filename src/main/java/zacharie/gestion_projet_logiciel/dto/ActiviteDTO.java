@@ -6,9 +6,10 @@ import java.util.List;
 public class ActiviteDTO {
     private Long id;
     private String nom;
-    private LocalDate dateDebut;
-    private LocalDate dateFin;
+    private LocalDate date_debut;
+    private LocalDate date_fin;
     private String responsable;
+    private Long tache_id;
     private List<RessourceDTO> ressources;
 
     public Long getId() {
@@ -27,20 +28,20 @@ public class ActiviteDTO {
         this.nom = nom;
     }
 
-    public LocalDate getDateDebut() {
-        return dateDebut;
+    public LocalDate getDate_debut() {
+        return date_debut;
     }
 
-    public void setDateDebut(LocalDate dateDebut) {
-        this.dateDebut = dateDebut;
+    public void setDate_debut(LocalDate date_debut) {
+        this.date_debut = date_debut;
     }
 
-    public LocalDate getDateFin() {
-        return dateFin;
+    public LocalDate getDate_fin() {
+        return date_fin;
     }
 
-    public void setDateFin(LocalDate dateFin) {
-        this.dateFin = dateFin;
+    public void setDate_fin(LocalDate date_fin) {
+        this.date_fin = date_fin;
     }
 
     public String getResponsable() {
@@ -49,6 +50,14 @@ public class ActiviteDTO {
 
     public void setResponsable(String responsable) {
         this.responsable = responsable;
+    }
+
+    public Long getTache_id() {
+        return tache_id;
+    }
+
+    public void setTache_id(Long tache_id) {
+        this.tache_id = tache_id;
     }
 
     public List<RessourceDTO> getRessources() {

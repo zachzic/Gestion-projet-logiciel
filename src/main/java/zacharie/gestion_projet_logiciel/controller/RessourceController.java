@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.controller;
 
+import zacharie.gestion_projet_logiciel.dto.RessourceDTO;
 import zacharie.gestion_projet_logiciel.model.Ressource;
 import zacharie.gestion_projet_logiciel.service.RessourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class RessourceController {
 
 //    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PostMapping
-    public ResponseEntity<Ressource> createRessource(@RequestBody Ressource ressource) {
-        Ressource newRessource = ressourceService.createRessource(ressource);
+    public ResponseEntity<Ressource> createRessource(@RequestBody RessourceDTO ressourceDTO) {
+        Ressource newRessource = ressourceService.createRessource(ressourceDTO);
         return ResponseEntity.ok(newRessource);
     }
 
@@ -37,9 +38,8 @@ public class RessourceController {
 
 //    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PutMapping("/{id}")
-    public ResponseEntity<Ressource> updateRessource(@PathVariable Long id, @RequestBody Ressource ressource) {
-        ressource.setId(id);
-        Ressource updatedRessource = ressourceService.updateRessource(ressource);
+    public ResponseEntity<RessourceDTO> updateRessource(@PathVariable Long id, @RequestBody RessourceDTO ressourceDTO) {
+        RessourceDTO updatedRessource = ressourceService.updateRessource(id,ressourceDTO);
         return ResponseEntity.ok(updatedRessource);
     }
 

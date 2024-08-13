@@ -1,6 +1,10 @@
 package zacharie.gestion_projet_logiciel.service;
 
+import zacharie.gestion_projet_logiciel.dto.RessourceDTO;
+import zacharie.gestion_projet_logiciel.mapper.RessourceMapper;
+import zacharie.gestion_projet_logiciel.model.Activite;
 import zacharie.gestion_projet_logiciel.model.Ressource;
+import zacharie.gestion_projet_logiciel.repository.ActiviteRepository;
 import zacharie.gestion_projet_logiciel.repository.RessourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,8 +16,16 @@ import java.util.Optional;
 public class RessourceService {
     @Autowired
     private RessourceRepository ressourceRepository;
+    @Autowired
+    private ActiviteRepository activiteRepository;
 
-    public Ressource createRessource(Ressource ressource) {
+    public Ressource createRessource(RessourceDTO ressourceDTO) {
+        Ressource ressource = RessourceMapper.INSTANCE.ressourceDTOToRessource(ressourceDTO);
+        if (ressourceDTO.getActivite_id() != null) {
+            Activite activite = activiteRepository.findById(ressourceDTO.getActivite_id())
+                    .orElseThrow(() -> new RuntimeException("Activite not found"));
+            ressource.setActivite(activite);
+        }
         return ressourceRepository.save(ressource);
     }
 
@@ -25,8 +37,24 @@ public class RessourceService {
         return ressourceRepository.findAll();
     }
 
-    public Ressource updateRessource(Ressource ressource) {
-        return ressourceRepository.save(ressource);
+    public RessourceDTO updateRessource(Long id, RessourceDTO ressourceDTO) {
+        Ressource ressource = ressourceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ressource not found"));
+
+        // Mappage des champs
+        ressource.setNom(ressourceDTO.getNom());
+        ressource.setUrl(ressourceDTO.getUrl());
+
+        if (ressourceDTO.getActivite_id() != null) {
+            Activite activite = activiteRepository.findById(ressourceDTO.getActivite_id())
+                    .orElseThrow(() -> new RuntimeException("Activite not found"));
+            ressource.setActivite(activite);
+        }
+
+        ressourceRepository.save(ressource);
+        return RessourceMapper.INSTANCE.ressourceToRessourceDTO(ressource);
+
+//        return ressourceRepository.save(ressource);
     }
 
     public void deleteRessource(Long id) {
