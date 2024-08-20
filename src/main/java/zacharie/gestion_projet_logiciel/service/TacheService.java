@@ -49,6 +49,9 @@ public class TacheService {
         // Si la tâche existe, mettre à jour son statut
         tacheOpt.ifPresent(this::mettreAJourStatut);
 
+        // Log pour vérifier le statut avant le mappage
+//        tacheOpt.ifPresent(tache -> System.out.println("Statut de la tâche avant mappage: " + tache.getStatut()));
+
         // Convertir la tâche en DTO et la retourner
         return tacheOpt.map(TacheMapper.INSTANCE::tacheToTacheDTO);
     }
@@ -70,19 +73,40 @@ public class TacheService {
         }
     }
 
-    public void annulerTache(Long tacheId) {
-        Tache tache = tacheRepository.findById(tacheId)
-                .orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
-        tache.setStatut(Statut.ANNULE);
-        tacheRepository.save(tache);
+    public class TacheNotFoundException extends RuntimeException {
+        public TacheNotFoundException(Long id) {
+            super("Tâche avec ID " + id + " non trouvée");
+        }
     }
 
-    public void terminerTache(Long tacheId) {
+    @Transactional // garantit que toutes les opérations de base de données dans la méthode seront validées ensemble!
+    public TacheDTO annulerTache(Long tacheId) {
         Tache tache = tacheRepository.findById(tacheId)
-                .orElseThrow(() -> new RuntimeException("Tâche non trouvée"));
+                .orElseThrow(() -> new TacheNotFoundException(tacheId));
+
+        if (tache.getStatut() == Statut.TERMINE || tache.getStatut() == Statut.ANNULE) {
+            throw new IllegalStateException("La tâche ne peut pas être annulée car elle est déjà terminée ou annulée.");
+        }
+
+        tache.setStatut(Statut.ANNULE);
+        tacheRepository.save(tache);
+        return TacheMapper.INSTANCE.tacheToTacheDTO(tache);
+    }
+
+    @Transactional
+    public TacheDTO terminerTache(Long tacheId) {
+        Tache tache = tacheRepository.findById(tacheId)
+                .orElseThrow(() -> new TacheNotFoundException(tacheId));
+
+        if (tache.getStatut() == Statut.ANNULE) {
+            throw new IllegalStateException("La tâche annulée ne peut pas être marquée comme terminée.");
+        }
+
         tache.setStatut(Statut.TERMINE);
         tacheRepository.save(tache);
+        return TacheMapper.INSTANCE.tacheToTacheDTO(tache);
     }
+
 
     @Scheduled(cron = "0 0 * * * ?")  // Toute les heures ... parce que l'appli ne tourne pas h 24
     @Transactional
@@ -100,12 +124,15 @@ public class TacheService {
     }
 
     public List<ActiviteDTO> getActivitesByTacheId(Long tacheId) {
-        List<Activite> activites = activiteRepository.findByTacheId(tacheId); // à gerer
+        List<Activite> activites = activiteRepository.findByTacheId(tacheId);
+
+
         return activites.stream()
                 .map(ActiviteMapper.INSTANCE::activiteToActiviteDTO)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public TacheDTO updateTache(Long id, TacheDTO tacheDTO) {
         Tache tache = tacheRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tache non trouvée"));
@@ -121,6 +148,10 @@ public class TacheService {
                     .orElseThrow(() -> new RuntimeException("Projet non trouvé"));
             tache.setProjet(projet);
         }
+
+        // Appel de la méthode pour mettre à jour le statut de la tâche
+        mettreAJourStatut(tache);
+
         return TacheMapper.INSTANCE.tacheToTacheDTO(tacheRepository.save(tache));
     }
 

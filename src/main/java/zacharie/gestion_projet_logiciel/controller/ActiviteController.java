@@ -50,7 +50,18 @@ public class ActiviteController {
         return ResponseEntity.ok(updatedActivite);
     }
 
-//    @PreAuthorize("hasRole('CHEF_DE_PROJET')")
+    @PutMapping("/{id}/annuler")
+    public void annulerActivite(@PathVariable Long id) {
+        activiteService.annulerActivite(id);
+    }
+
+    @PutMapping("/{id}/terminer")
+    public void terminerActivite(@PathVariable Long id) {
+        activiteService.terminerActivite(id);
+    }
+
+
+    //    @PreAuthorize("hasRole('CHEF_DE_PROJET')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteActivite(@PathVariable Long id) {
         activiteService.deleteActivite(id);

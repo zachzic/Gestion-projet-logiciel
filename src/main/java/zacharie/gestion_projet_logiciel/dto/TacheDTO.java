@@ -104,13 +104,13 @@ public class TacheDTO {
         this.projet_id = projet_id;
     }
 
-    public List<ActiviteDTO> getActivites() {
-        return activites;
-    }
-
-    public void setActivites(List<ActiviteDTO> activites) {
-        this.activites = activites;
-    }
+//    public List<ActiviteDTO> getActivites() {
+//        return activites;
+//    }
+//
+//    public void setActivites(List<ActiviteDTO> activites) {
+//        this.activites = activites;
+//    }
 
     public Statut getStatut() {
         return statut;

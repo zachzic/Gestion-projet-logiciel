@@ -92,13 +92,13 @@ public class Tache {
         this.projet = projet;
     }
 
-    public List<Activite> getActivite() {
-        return activite;
-    }
-
-    public void setActivite(List<Activite> activite) {
-        this.activite = activite;
-    }
+//    public List<Activite> getActivite() {
+//        return activite;
+//    }
+//
+//    public void setActivite(List<Activite> activite) {
+//        this.activite = activite;
+//    }
 
     public Statut getStatut() {
         return statut;

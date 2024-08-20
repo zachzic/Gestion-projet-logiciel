@@ -13,8 +13,10 @@ public interface TacheMapper {
     TacheMapper INSTANCE = Mappers.getMapper(TacheMapper.class);
 
     @Mapping(source = "projet.id", target = "projet_id")
+    @Mapping(source = "statut", target = "statut") // Ajout explicite du mappage pour le champ 'statut'
     TacheDTO tacheToTacheDTO(Tache tache);
 
     @Mapping(source = "projet_id", target = "projet.id")
+    @Mapping(source = "statut", target = "statut") // Ajout explicite du mappage pour le champ 'statut'
     Tache tacheDTOToTache(TacheDTO tacheDTO);
 }

@@ -80,13 +80,13 @@ public class ActiviteDTO {
         this.tache_id = tache_id;
     }
 
-    public List<RessourceDTO> getRessources() {
-        return ressources;
-    }
-
-    public void setRessources(List<RessourceDTO> ressources) {
-        this.ressources = ressources;
-    }
+//    public List<RessourceDTO> getRessources() {
+//        return ressources;
+//    }
+//
+//    public void setRessources(List<RessourceDTO> ressources) {
+//        this.ressources = ressources;
+//    }
 
     public Statut getStatut() {
         return statut;

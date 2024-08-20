@@ -13,8 +13,10 @@ public interface ActiviteMapper {
     ActiviteMapper INSTANCE = Mappers.getMapper(ActiviteMapper.class);
 
     @Mapping(source = "tache.id", target = "tache_id")
+    @Mapping(source = "statut", target = "statut") // Ajout explicite du mappage pour le champ 'statut'
     ActiviteDTO activiteToActiviteDTO(Activite activite);
 
     @Mapping(source = "tache_id", target = "tache.id")
+    @Mapping(source = "statut", target = "statut") // Ajout explicite du mappage pour le champ 'statut'
     Activite activiteDTOToActivite(ActiviteDTO activiteDTO);
 }

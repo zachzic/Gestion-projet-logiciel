@@ -47,6 +47,16 @@ public class ProjetController {
         return ResponseEntity.ok(updatedProjet);
     }
 
+    @PutMapping("/{id}/annuler")
+    public void annulerProjet(@PathVariable Long id) {
+        projetService.annulerProjet(id);
+    }
+
+    @PutMapping("/{id}/terminer")
+    public void terminerProjet(@PathVariable Long id) {
+        projetService.terminerProjet(id);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProjet(@PathVariable Long id) {
         projetService.deleteProjet(id);
