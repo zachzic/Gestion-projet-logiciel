@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.controller;
 
+import zacharie.gestion_projet_logiciel.dto.ActiviteDTO;
 import zacharie.gestion_projet_logiciel.dto.TacheDTO;
 import zacharie.gestion_projet_logiciel.model.Tache;
 import zacharie.gestion_projet_logiciel.service.TacheService;
@@ -34,10 +35,26 @@ public class TacheController {
         return ResponseEntity.ok(taches);
     }
 
+    @GetMapping("/{id}/activites")
+    public ResponseEntity<List<ActiviteDTO>> getActivitesByTacheId(@PathVariable Long id) {
+        List<ActiviteDTO> activites = tacheService.getActivitesByTacheId(id);
+        return ResponseEntity.ok(activites);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<TacheDTO> updateTache(@PathVariable Long id, @RequestBody TacheDTO tacheDTO) {
         TacheDTO updatedTache = tacheService.updateTache(id, tacheDTO);
         return ResponseEntity.ok(updatedTache);
+    }
+
+    @PutMapping("/{id}/annuler")
+    public void annulerTache(@PathVariable Long id) {
+        tacheService.annulerTache(id);
+    }
+
+    @PutMapping("/{id}/terminer")
+    public void terminerTache(@PathVariable Long id) {
+        tacheService.terminerTache(id);
     }
 
     @DeleteMapping("/{id}")

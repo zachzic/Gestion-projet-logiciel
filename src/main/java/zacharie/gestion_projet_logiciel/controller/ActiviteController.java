@@ -1,6 +1,7 @@
 package zacharie.gestion_projet_logiciel.controller;
 
 import zacharie.gestion_projet_logiciel.dto.ActiviteDTO;
+import zacharie.gestion_projet_logiciel.dto.RessourceDTO;
 import zacharie.gestion_projet_logiciel.model.Activite;
 import zacharie.gestion_projet_logiciel.service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +25,24 @@ public class ActiviteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Activite> getActiviteById(@PathVariable Long id) {
+    public ResponseEntity<ActiviteDTO> getActiviteById(@PathVariable Long id) {
         return activiteService.getActiviteById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
+
     @GetMapping
-    public ResponseEntity<List<Activite>> getAllActivites() {
-        List<Activite> activites = activiteService.getAllActivites();
+    public ResponseEntity<List<ActiviteDTO>> getAllActivites() {
+        List<ActiviteDTO> activites = activiteService.getAllActivites();
         return ResponseEntity.ok(activites);
     }
 
+    @GetMapping("/{id}/ressources")
+    public ResponseEntity<List<RessourceDTO>> getRessourcesByActiviteId(@PathVariable Long id) {
+        List<RessourceDTO> ressources = activiteService.getRessourcesByActiviteId(id);
+        return ResponseEntity.ok(ressources);
+    }
 //    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
     @PutMapping("/{id}")
     public ResponseEntity<ActiviteDTO> updateActivite(@PathVariable Long id, @RequestBody ActiviteDTO activiteDTO) {

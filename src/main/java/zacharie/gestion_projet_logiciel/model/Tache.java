@@ -17,6 +17,10 @@ public class Tache {
     private String responsable;
     private String description; // Ajoutez cet attribut
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Statut statut;
+
     @ManyToOne
     @JoinColumn(name = "projet_id")
     private Projet projet;
@@ -94,5 +98,13 @@ public class Tache {
 
     public void setActivite(List<Activite> activite) {
         this.activite = activite;
+    }
+
+    public Statut getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 }

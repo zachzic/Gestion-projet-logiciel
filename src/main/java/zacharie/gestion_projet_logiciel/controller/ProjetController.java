@@ -1,9 +1,11 @@
 package zacharie.gestion_projet_logiciel.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zacharie.gestion_projet_logiciel.dto.ProjetDTO;
+import zacharie.gestion_projet_logiciel.dto.TacheDTO;
 import zacharie.gestion_projet_logiciel.service.ProjetService;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class ProjetController {
     private ProjetService projetService;
 
     @PostMapping
-    public ResponseEntity<ProjetDTO> createProjet(@RequestBody ProjetDTO projetDTO) {
+    public ResponseEntity<ProjetDTO> createProjet(@Valid @RequestBody ProjetDTO projetDTO) {
         ProjetDTO createdProjet = projetService.createProjet(projetDTO);
         return ResponseEntity.ok(createdProjet);
     }
@@ -31,6 +33,12 @@ public class ProjetController {
     public ResponseEntity<ProjetDTO> getProjetById(@PathVariable Long id) {
         ProjetDTO projet = projetService.getProjetById(id);
         return ResponseEntity.ok(projet);
+    }
+
+    @GetMapping("/{id}/taches")
+    public ResponseEntity<List<TacheDTO>> getTachesByProjetId(@PathVariable Long id) {
+        List<TacheDTO> taches = projetService.getTachesByProjetId(id);
+        return ResponseEntity.ok(taches);
     }
 
     @PutMapping("/{id}")

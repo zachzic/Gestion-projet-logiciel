@@ -1,18 +1,43 @@
 package zacharie.gestion_projet_logiciel.dto;
 
+import jakarta.validation.constraints.*;
+import zacharie.gestion_projet_logiciel.model.Statut;
+import zacharie.gestion_projet_logiciel.validation.ValidProjectDates;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@ValidProjectDates // annotation créer par moi même ...
 public class TacheDTO {
     private Long id;
+
+    @NotNull(message = "Le nom de la tâche est obligatoire ! ")
+    @Size(min = 3, max = 100, message = "Le nom doit être compris entre 3 et 100 caractères")
     private String nom;
+
+    @FutureOrPresent(message = "La date de début doit être dans le futur")
     private LocalDate date_debut;
+
+    @FutureOrPresent(message = "La date de fin doit être dans le futur")
     private LocalDate date_fin;
+
+    @NotNull(message = "La priorité est obligatoire !")
+    @Min(value = 1, message = "La priorité doit être au moins de 1")
+    @Max(value = 10, message = "La priorité doit être au plus de 10")
     private int priorite;
+
     private String responsable;
+
+    @NotNull(message = "La description de la tâche est obligatoire ! ")
+    @Size(min = 10, message = "La description doit avoir au moins 10 caractères")
     private String description;  // Ajoutez ce champ
+
+    @NotNull(message = "Le projet associé à la tâche est obligatoire ! ")
     private Long projet_id;  // Ajoutez ce champ
     private List<ActiviteDTO> activites;
+
+    @NotNull(message = "Le statut de la tâche est obligatoire !")
+    private Statut statut; // Champ statut ajouté
 
     // Getters and Setters
     public Long getId() {
@@ -85,5 +110,13 @@ public class TacheDTO {
 
     public void setActivites(List<ActiviteDTO> activites) {
         this.activites = activites;
+    }
+
+    public Statut getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 }

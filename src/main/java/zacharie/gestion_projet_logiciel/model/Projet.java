@@ -15,6 +15,10 @@ public class Projet {
     private LocalDate date_fin;
     private double budget;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Statut statut;
+
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
     private List<Tache> tache;
 
@@ -59,7 +63,15 @@ public class Projet {
         this.date_fin = date_fin;
     }
 
-//    public List<Tache> getTache() {
+    public Statut getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
+    }
+
+    //    public List<Tache> getTache() {
 //        return tache;
 //    }
 //

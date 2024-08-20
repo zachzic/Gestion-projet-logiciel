@@ -17,6 +17,10 @@ public class Activite {
     private LocalDate date_fin;
     private String responsable;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Statut statut;
+
     @ManyToOne
     @JoinColumn(name = "tache_id")
     private Tache tache;
@@ -70,5 +74,13 @@ public class Activite {
 
     public void setTache(Tache tache) {
         this.tache = tache;
+    }
+
+    public Statut getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 }

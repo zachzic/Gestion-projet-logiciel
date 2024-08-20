@@ -1,15 +1,35 @@
 package zacharie.gestion_projet_logiciel.dto;
 
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import zacharie.gestion_projet_logiciel.model.Statut;
+import zacharie.gestion_projet_logiciel.validation.ValidProjectDates;
+
 import java.time.LocalDate;
 import java.util.List;
 
+@ValidProjectDates // annotation créer par moi même ...
 public class ActiviteDTO {
     private Long id;
+
+    @NotNull(message = "Le nom de l'activité est obligatoire ! ")
+    @Size(min = 3, max = 100, message = "Le nom doit être compris entre 3 et 100 caractères")
     private String nom;
+
+    @FutureOrPresent(message = "La date de début doit être dans le futur")
     private LocalDate date_debut;
+
+    @FutureOrPresent(message = "La date de fin doit être dans le futur")
     private LocalDate date_fin;
     private String responsable;
+
+    @NotNull(message = "La tâche associé à l'activité est obligatoire ! ")
     private Long tache_id;
+
+    @NotNull(message = "Le statut de la tâche est obligatoire !")
+    private Statut statut; // Champ statut ajouté
+
     private List<RessourceDTO> ressources;
 
     public Long getId() {
@@ -66,5 +86,13 @@ public class ActiviteDTO {
 
     public void setRessources(List<RessourceDTO> ressources) {
         this.ressources = ressources;
+    }
+
+    public Statut getStatut() {
+        return statut;
+    }
+
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 }

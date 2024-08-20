@@ -1,9 +1,17 @@
 package zacharie.gestion_projet_logiciel.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class RessourceDTO {
     private Long id;
+
+    @NotNull(message = "Le nom de la ressource est obligatoire ! ")
     private String nom;
+
+    @NotNull(message = "L'url' est obligatoire ! ")
     private String url;
+
+    @NotNull(message = "L'activité associé à la ressource est obligatoire ! ")
     private Long activite_id;
 
     public Long getId() {

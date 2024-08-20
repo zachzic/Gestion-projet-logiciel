@@ -31,8 +31,8 @@ public class RessourceController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Ressource>> getAllRessources() {
-        List<Ressource> ressources = ressourceService.getAllRessources();
+    public ResponseEntity<List<RessourceDTO>> getAllRessources() {
+        List<RessourceDTO> ressources = ressourceService.getAllRessources();
         return ResponseEntity.ok(ressources);
     }
 

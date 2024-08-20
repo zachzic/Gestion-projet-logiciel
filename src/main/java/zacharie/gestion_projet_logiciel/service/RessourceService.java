@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RessourceService {
@@ -33,8 +34,10 @@ public class RessourceService {
         return ressourceRepository.findById(id);
     }
 
-    public List<Ressource> getAllRessources() {
-        return ressourceRepository.findAll();
+    public List<RessourceDTO> getAllRessources() {
+        return ressourceRepository.findAll().stream()
+                .map(RessourceMapper.INSTANCE::ressourceToRessourceDTO)
+                .collect(Collectors.toList());
     }
 
     public RessourceDTO updateRessource(Long id, RessourceDTO ressourceDTO) {
