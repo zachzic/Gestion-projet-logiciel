@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import zacharie.gestion_projet_logiciel.model.Statut;
 import zacharie.gestion_projet_logiciel.validation.ValidProjectDates;
@@ -15,10 +16,12 @@ public class TacheDTO {
     @Size(min = 3, max = 100, message = "Le nom doit être compris entre 3 et 100 caractères")
     private String nom;
 
-    @FutureOrPresent(message = "La date de début doit être dans le futur")
+//    @FutureOrPresent(message = "La date de début doit être dans le futur")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate date_debut;
 
     @FutureOrPresent(message = "La date de fin doit être dans le futur")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate date_fin;
 
     @NotNull(message = "La priorité est obligatoire !")

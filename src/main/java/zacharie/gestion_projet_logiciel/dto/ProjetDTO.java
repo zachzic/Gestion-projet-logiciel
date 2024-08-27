@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -18,11 +19,13 @@ public class ProjetDTO {
     private String nom;
 
     @NotNull(message = "La date de début est obligatoire")
-    @FutureOrPresent(message = "La date de début doit être dans le futur")
+//    @FutureOrPresent(message = "La date de début doit être dans le futur")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate date_debut;
 
     @NotNull(message = "La date de fin est obligatoire")
     @FutureOrPresent(message = "La date de fin doit être dans le futur")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate date_fin;
     private Double budget;
 

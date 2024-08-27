@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import zacharie.gestion_projet_logiciel.dto.ActiviteDTO;
 import zacharie.gestion_projet_logiciel.dto.RessourceDTO;
 import zacharie.gestion_projet_logiciel.model.Activite;
@@ -17,13 +18,14 @@ public class ActiviteController {
     @Autowired
     private ActiviteService activiteService;
 
-//    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @PostMapping
     public ResponseEntity<Activite> createActivite(@RequestBody ActiviteDTO activiteDTO) {
         Activite newActivite = activiteService.createActivite(activiteDTO);
         return ResponseEntity.ok(newActivite);
     }
 
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @GetMapping("/{id}")
     public ResponseEntity<ActiviteDTO> getActiviteById(@PathVariable Long id) {
         return activiteService.getActiviteById(id)
@@ -31,37 +33,41 @@ public class ActiviteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @GetMapping
     public ResponseEntity<List<ActiviteDTO>> getAllActivites() {
         List<ActiviteDTO> activites = activiteService.getAllActivites();
         return ResponseEntity.ok(activites);
     }
 
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @GetMapping("/{id}/ressources")
     public ResponseEntity<List<RessourceDTO>> getRessourcesByActiviteId(@PathVariable Long id) {
         List<RessourceDTO> ressources = activiteService.getRessourcesByActiviteId(id);
         return ResponseEntity.ok(ressources);
     }
-//    @PreAuthorize("hasRole('CHEF_DE_PROJET') or hasRole('DEVELOPPEUR')")
+
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @PutMapping("/{id}")
     public ResponseEntity<ActiviteDTO> updateActivite(@PathVariable Long id, @RequestBody ActiviteDTO activiteDTO) {
         ActiviteDTO updatedActivite = activiteService.updateActivite(id,activiteDTO);
         return ResponseEntity.ok(updatedActivite);
     }
 
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @PutMapping("/{id}/annuler")
     public void annulerActivite(@PathVariable Long id) {
         activiteService.annulerActivite(id);
     }
 
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @PutMapping("/{id}/terminer")
     public void terminerActivite(@PathVariable Long id) {
         activiteService.terminerActivite(id);
     }
 
 
-    //    @PreAuthorize("hasRole('CHEF_DE_PROJET')")
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteActivite(@PathVariable Long id) {
         activiteService.deleteActivite(id);

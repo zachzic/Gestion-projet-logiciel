@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,10 +18,12 @@ public class ActiviteDTO {
     @Size(min = 3, max = 100, message = "Le nom doit être compris entre 3 et 100 caractères")
     private String nom;
 
-    @FutureOrPresent(message = "La date de début doit être dans le futur")
+//    @FutureOrPresent(message = "La date de début doit être dans le futur")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate date_debut;
 
     @FutureOrPresent(message = "La date de fin doit être dans le futur")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate date_fin;
     private String responsable;
 

@@ -113,7 +113,7 @@ public class ActiviteService {
     }
 
     public List<RessourceDTO> getRessourcesByActiviteId(Long activiteId) {
-        List<Ressource> ressources = ressourceRepository.findByActiviteId(activiteId); //gerer ça aussi
+        List<Ressource> ressources = ressourceRepository.findByActiviteId(activiteId);
         return ressources.stream()
                 .map(RessourceMapper.INSTANCE::ressourceToRessourceDTO)
                 .collect(Collectors.toList());
@@ -141,6 +141,8 @@ public class ActiviteService {
     }
 
     public void deleteActivite(Long id) {
+        Activite activite = activiteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Activité avec ID " + id + " non trouvée"));
         activiteRepository.deleteById(id);
     }
 }

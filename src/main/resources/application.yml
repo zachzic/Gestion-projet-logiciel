@@ -35,30 +35,32 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: http://localhost:8080/auth/realms/gestion-projet
+          issuer-uri: http://localhost:8180/realms/gestion-projet
 
 # Configuration de l'application spécifique à Keycloak
-#app:
-#  keycloak:
-#    admin:
-#      password: xxxxx
-#      username: xxxxx
-#    client-id: gestion-projet
-#    client-secret: SKCLsloHZyrFbtb5Kcm8s3B3vFvEHkCZ
-#    grant-type: password
-#    login:
-#      url: http://localhost:8080/auth/realms/gestion-projet/protocol/openid-connect/token
-#    realm:
-#      name: gestion-projet
-#    server:
-#      url: http://localhost:8080/auth
-#
-#keycloak:
-#  ssl-required: external
-#  use-resource-role-mappings: true
-#
-#jwt:
-#  auth:
-#    converter:
-#      resource-id: gestion-projet
-#      principal-attribute: preferred_username
+app:
+  keycloak:
+    server:
+      url: http://localhost:8180
+    realm:
+      name: gestion-projet
+    client-id: gestion-projet
+    client-secret: SKCLsloHZyrFbtb5Kcm8s3B3vFvEHkCZ
+    Admin:
+      username: xxxxxxxxxxxx
+      password: xxxxxxxxxxxx
+    login:
+      url: http://localhost:8180/realms/gestion-projet/protocol/openid-connect/token
+
+
+    ssl-required: external
+    use-resource-role-mappings: true
+
+jwt:
+  auth:
+    converter:
+      resource-id: gestion-projet
+      principal-attribute: preferred_username
+logging:
+  level:
+    org.springframework.security: DEBUG

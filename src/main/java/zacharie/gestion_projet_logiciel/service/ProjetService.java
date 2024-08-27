@@ -122,6 +122,8 @@ public class ProjetService {
     }
 
     public void deleteProjet(Long id) {
+        Projet projet = projetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Projet avec ID " + id + " non trouvé"));
         projetRepository.deleteById(id);
     }
 }

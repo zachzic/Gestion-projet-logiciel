@@ -156,6 +156,8 @@ public class TacheService {
     }
 
     public void deleteTache(Long id) {
+        Tache tache = tacheRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tâche avec ID " + id + " non trouvée"));
         tacheRepository.deleteById(id);
     }
 }
