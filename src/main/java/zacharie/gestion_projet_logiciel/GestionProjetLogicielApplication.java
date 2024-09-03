@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling // support des tâches planifiées
-// le exclude pour ignorer la config de la base de donnée
+// le_exclude pour ignorer la config de la base de donnée
 public class GestionProjetLogicielApplication {
 
     public static void main(String[] args) {

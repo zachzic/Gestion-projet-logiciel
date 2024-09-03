@@ -14,6 +14,9 @@ public class Projet {
     private LocalDate date_debut;
     private LocalDate date_fin;
     private double budget;
+    private String responsable;
+    private String description;
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -69,6 +72,22 @@ public class Projet {
 
     public void setStatut(Statut statut) {
         this.statut = statut;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     //    public List<Tache> getTache() {

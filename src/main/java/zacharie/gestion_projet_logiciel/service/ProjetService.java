@@ -31,6 +31,13 @@ public class ProjetService {
         return ProjetMapper.INSTANCE.projetToProjetDTO(projet);
     }
 
+    public List<ProjetDTO> getProjetsByResponsable(String responsable) {
+        return projetRepository.findByResponsable(responsable).stream()
+                .map(ProjetMapper.INSTANCE::projetToProjetDTO)
+                .collect(Collectors.toList());
+    }
+
+
     public List<ProjetDTO> getAllProjets() {
         return projetRepository.findAll().stream()
                 .map(ProjetMapper.INSTANCE::projetToProjetDTO)
@@ -114,6 +121,8 @@ public class ProjetService {
         projet.setDate_fin(projetDTO.getDate_fin());
         projet.setBudget(projetDTO.getBudget());
         projet.setStatut(projetDTO.getStatut());
+        projet.setResponsable(projetDTO.getResponsable());
+        projet.setDescription(projetDTO.getDescription());
         projet = projetRepository.save(projet);
 
         // Appel de la méthode pour mettre à jour le statut du projet

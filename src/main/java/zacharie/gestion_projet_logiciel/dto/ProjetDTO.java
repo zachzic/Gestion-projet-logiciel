@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Size;
 import zacharie.gestion_projet_logiciel.model.Statut;
 import zacharie.gestion_projet_logiciel.validation.UniqueProjectName;
 import zacharie.gestion_projet_logiciel.validation.ValidProjectDates;
@@ -27,7 +28,14 @@ public class ProjetDTO {
     @FutureOrPresent(message = "La date de fin doit être dans le futur")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "UTC")
     private LocalDate date_fin;
+
     private Double budget;
+
+    private String responsable;
+
+    @NotNull(message = "La description de la tâche est obligatoire ! ")
+    @Size(min = 10, message = "La description doit avoir au moins 10 caractères")
+    private String description;  // Ajoutez ce champ
 
     @NotNull(message = "Le statut de la tâche est obligatoire !")
     private Statut statut; // Champ statut ajouté
@@ -80,6 +88,22 @@ public class ProjetDTO {
 
     public void setStatut(Statut statut) {
         this.statut = statut;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     //    public List<TacheDTO> getTaches() {

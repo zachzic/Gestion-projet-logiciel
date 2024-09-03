@@ -46,9 +46,9 @@ app:
       name: gestion-projet
     client-id: gestion-projet
     client-secret: SKCLsloHZyrFbtb5Kcm8s3B3vFvEHkCZ
-    Admin:
-      username: xxxxxxxxxxxx
-      password: xxxxxxxxxxxx
+    admin:
+      username: zachzic
+      password: '#1001001+'
     login:
       url: http://localhost:8180/realms/gestion-projet/protocol/openid-connect/token
 

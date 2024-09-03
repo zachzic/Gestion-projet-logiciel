@@ -11,8 +11,13 @@ public interface ProjetMapper {
     ProjetMapper INSTANCE = Mappers.getMapper(ProjetMapper.class);
 
     @Mapping(source = "statut", target = "statut") // Ajout explicite du mappage pour le champ 'statut'
+    @Mapping(source = "responsable", target = "responsable")
+    @Mapping(source = "description", target = "description")
+
     ProjetDTO projetToProjetDTO(Projet projet);
 
     @Mapping(source = "statut", target = "statut") // Ajout explicite du mappage pour le champ 'statut'
+    @Mapping(source = "responsable", target = "responsable")
+    @Mapping(source = "description", target = "description")
     Projet projetDTOToProjet(ProjetDTO projetDTO);
 }

@@ -1,12 +1,16 @@
 package zacharie.gestion_projet_logiciel.controller;
 
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import zacharie.gestion_projet_logiciel.dto.ProjetDTO;
 import zacharie.gestion_projet_logiciel.dto.TacheDTO;
+import zacharie.gestion_projet_logiciel.model.Projet;
 import zacharie.gestion_projet_logiciel.service.ProjetService;
 
 import java.util.List;
@@ -15,6 +19,7 @@ import java.util.List;
 @RequestMapping("/api/projets")
 public class ProjetController {
 
+    private static final Logger log = LoggerFactory.getLogger(ProjetController.class);
     @Autowired
     private ProjetService projetService;
 
@@ -31,6 +36,15 @@ public class ProjetController {
         List<ProjetDTO> projets = projetService.getAllProjets();
         return ResponseEntity.ok(projets);
     }
+
+//    @GetMapping("/moi")
+//    public ResponseEntity<List<ProjetDTO>> getMesProjets() {
+//        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//        List<ProjetDTO> mesProjets = projetService.getProjetsByResponsable(username);
+//
+//        return ResponseEntity.ok(mesProjets);
+//    }
+
 
     @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin')")
     @GetMapping("/{id}")

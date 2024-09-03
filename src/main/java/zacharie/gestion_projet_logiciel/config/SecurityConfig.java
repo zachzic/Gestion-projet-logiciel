@@ -56,6 +56,11 @@ public class SecurityConfig {
         defaultGrantedAuthoritiesConverter.setAuthoritiesClaimName("realm_access.roles");
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(defaultGrantedAuthoritiesConverter);
+
+        // Personnaliser le convertisseur pour ajouter des informations supplémentaires
+        jwtAuthenticationConverter.setPrincipalClaimName("preferred_username"); // Utiliser le username comme principal
+
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
             Collection<GrantedAuthority> authorities = defaultGrantedAuthoritiesConverter.convert(jwt);
 
