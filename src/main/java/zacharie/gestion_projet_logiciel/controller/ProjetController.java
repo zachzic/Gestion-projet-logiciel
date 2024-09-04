@@ -46,7 +46,7 @@ public class ProjetController {
 //    }
 
 
-    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin')")
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('MANAGER')")
     @GetMapping("/{id}")
     public ResponseEntity<ProjetDTO> getProjetById(@PathVariable Long id) {
         ProjetDTO projet = projetService.getProjetById(id);

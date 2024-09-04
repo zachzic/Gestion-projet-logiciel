@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class Projet {
     @Column(nullable = false)
     private Statut statut;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL)
     private List<Tache> tache;
 
@@ -90,11 +92,11 @@ public class Projet {
         this.description = description;
     }
 
-    //    public List<Tache> getTache() {
-//        return tache;
-//    }
-//
-//    public void setTache(List<Tache> tache) {
-//        this.tache = tache;
-//    }
+    public List<Tache> getTache() {
+        return tache;
+    }
+
+    public void setTache(List<Tache> tache) {
+        this.tache = tache;
+    }
 }

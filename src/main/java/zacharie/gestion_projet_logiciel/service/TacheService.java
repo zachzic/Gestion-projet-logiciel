@@ -5,8 +5,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zacharie.gestion_projet_logiciel.dto.ActiviteDTO;
+import zacharie.gestion_projet_logiciel.dto.ProjetDTO;
 import zacharie.gestion_projet_logiciel.dto.TacheDTO;
 import zacharie.gestion_projet_logiciel.mapper.ActiviteMapper;
+import zacharie.gestion_projet_logiciel.mapper.ProjetMapper;
 import zacharie.gestion_projet_logiciel.mapper.TacheMapper;
 import zacharie.gestion_projet_logiciel.model.Activite;
 import zacharie.gestion_projet_logiciel.model.Projet;
@@ -117,12 +119,23 @@ public class TacheService {
         }
     }
 
+    public List<TacheDTO> getTachesByStatut(Statut statut) {
+        return tacheRepository.findByStatut(statut).stream()
+                .map(TacheMapper.INSTANCE::tacheToTacheDTO)
+                .collect(Collectors.toList());
+    }
+
     public List<TacheDTO> getAllTaches() {
         return tacheRepository.findAll().stream()
                 .map(TacheMapper.INSTANCE::tacheToTacheDTO)
                 .collect(Collectors.toList());
     }
 
+    public List<TacheDTO> getTachesByResponsable(String responsable) {
+        return tacheRepository.findByResponsable(responsable).stream()
+                .map(TacheMapper.INSTANCE::tacheToTacheDTO)
+                .collect(Collectors.toList());
+    }
     public List<ActiviteDTO> getActivitesByTacheId(Long tacheId) {
         List<Activite> activites = activiteRepository.findByTacheId(tacheId);
 

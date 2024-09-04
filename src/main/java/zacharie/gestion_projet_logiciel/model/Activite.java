@@ -1,5 +1,6 @@
 package zacharie.gestion_projet_logiciel.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.annotation.Resource;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class Activite {
     @Column(nullable = false)
     private Statut statut;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "tache_id")
     private Tache tache;

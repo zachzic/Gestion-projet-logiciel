@@ -1,5 +1,7 @@
 package zacharie.gestion_projet_logiciel.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -21,6 +23,8 @@ public class Tache {
     @Column(nullable = false)
     private Statut statut;
 
+//    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "projet_id")
     private Projet projet;
@@ -92,13 +96,13 @@ public class Tache {
         this.projet = projet;
     }
 
-//    public List<Activite> getActivite() {
-//        return activite;
-//    }
-//
-//    public void setActivite(List<Activite> activite) {
-//        this.activite = activite;
-//    }
+    public List<Activite> getActivite() {
+        return activite;
+    }
+
+    public void setActivite(List<Activite> activite) {
+        this.activite = activite;
+    }
 
     public Statut getStatut() {
         return statut;

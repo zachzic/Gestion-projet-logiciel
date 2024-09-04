@@ -37,6 +37,11 @@ public class ProjetService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProjetDTO> getProjetsByStatut(Statut statut) {
+        return projetRepository.findByStatut(statut).stream()
+                .map(ProjetMapper.INSTANCE::projetToProjetDTO)
+                .collect(Collectors.toList());
+    }
 
     public List<ProjetDTO> getAllProjets() {
         return projetRepository.findAll().stream()

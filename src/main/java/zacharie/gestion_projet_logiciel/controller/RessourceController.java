@@ -17,14 +17,14 @@ public class RessourceController {
     @Autowired
     private RessourceService ressourceService;
 
-    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') ")
     @PostMapping
     public ResponseEntity<Ressource> createRessource(@RequestBody RessourceDTO ressourceDTO) {
         Ressource newRessource = ressourceService.createRessource(ressourceDTO);
         return ResponseEntity.ok(newRessource);
     }
 
-    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')  or hasRole('MANAGER') or hasRole('DESIGNER') or hasRole('DEVOPS') or hasRole('TESTEUR')")
     @GetMapping("/{id}")
     public ResponseEntity<Ressource> getRessourceById(@PathVariable Long id) {
         return ressourceService.getRessourceById(id)
@@ -32,14 +32,14 @@ public class RessourceController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA') or hasRole('MANAGER') or hasRole('DESIGNER') or hasRole('DEVOPS') or hasRole('TESTEUR')")
     @GetMapping
     public ResponseEntity<List<RessourceDTO>> getAllRessources() {
         List<RessourceDTO> ressources = ressourceService.getAllRessources();
         return ResponseEntity.ok(ressources);
     }
 
-    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') or hasRole('DEVELOPPEUR') or hasRole('DBA')")
+    @PreAuthorize("hasRole('CHEF_PROJET') or hasRole('Admin') ")
     @PutMapping("/{id}")
     public ResponseEntity<RessourceDTO> updateRessource(@PathVariable Long id, @RequestBody RessourceDTO ressourceDTO) {
         RessourceDTO updatedRessource = ressourceService.updateRessource(id,ressourceDTO);

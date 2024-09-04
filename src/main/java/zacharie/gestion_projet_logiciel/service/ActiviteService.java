@@ -105,6 +105,11 @@ public class ActiviteService {
         }
     }
 
+    public List<ActiviteDTO> getActivitesByStatut(Statut statut) {
+        return activiteRepository.findByStatut(statut).stream()
+                .map(ActiviteMapper.INSTANCE::activiteToActiviteDTO)
+                .collect(Collectors.toList());
+    }
 
     public List<ActiviteDTO> getAllActivites() {
         return activiteRepository.findAll().stream()
@@ -112,6 +117,11 @@ public class ActiviteService {
                 .collect(Collectors.toList());
     }
 
+    public List<ActiviteDTO> getActivitesByResponsable(String responsable) {
+        return activiteRepository.findByResponsable(responsable).stream()
+                .map(ActiviteMapper.INSTANCE::activiteToActiviteDTO)
+                .collect(Collectors.toList());
+    }
     public List<RessourceDTO> getRessourcesByActiviteId(Long activiteId) {
         List<Ressource> ressources = ressourceRepository.findByActiviteId(activiteId);
         return ressources.stream()
